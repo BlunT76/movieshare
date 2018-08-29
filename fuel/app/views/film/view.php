@@ -30,4 +30,5 @@
 	
 
 <?php echo Html::anchor('film/edit/'.$film->id, 'Edit'); ?> |
-<?php echo Html::anchor('film', 'Back'); ?>
+<?php echo Html::anchor('film', 'Back'); ?> <?php if($film->rented==0){ ?> |
+<?php echo Html::anchor('film/loan/'.$film->id,'Ajouter au panier'); ?><?php } ?>
