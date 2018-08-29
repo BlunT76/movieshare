@@ -133,4 +133,8 @@ class Controller_Film extends Controller_Template
             Response::redirect('film');
         }
     }
+	public function action_populate() {
+		$this->template->title = "Ffdtgfgtrms";
+		$this->template->content = View::forge('film/populate');
+	}
 }
