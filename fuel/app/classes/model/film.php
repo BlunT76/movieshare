@@ -31,7 +31,7 @@ class Model_Film extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('title', 'Title', 'required|max_length[255]');
+		//$val->add_field('title', 'Title', 'required|max_length[255]');
 		$val->add_field('year', 'Year', 'required|valid_string[numeric]');
 		$val->add_field('director', 'Director', 'required|max_length[255]');
 		$val->add_field('actors', 'Actors', 'required|max_length[255]');

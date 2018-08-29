@@ -30,7 +30,7 @@ class Model_User extends Model
 		$val->add_field('username', 'Username', 'required|max_length[255]');
 		$val->add_field('password', 'Password', 'required|max_length[255]');
 		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
-		$val->add_field('role', 'Role', 'required|max_length[255]');
+		//$val->add_field('role', 'Role', 'required|max_length[255]');
 
 		return $val;
 	}
