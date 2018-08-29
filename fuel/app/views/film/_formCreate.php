@@ -2,8 +2,9 @@
 
 	<fieldset>
 		<div class="form-group">
-		<h3><?php echo $film->title; ?></h3>
-			
+			<?php echo Form::label('Title', 'title', array('class'=>'control-label')); ?>
+
+				<?php echo Form::input('title', Input::post('title', isset($film) ? $film->title : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Title')); ?>
 
 		</div>
 		<div class="form-group">

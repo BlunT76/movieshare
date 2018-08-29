@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 class Controller_User extends Controller_Template
 {
 
@@ -35,7 +35,7 @@ class Controller_User extends Controller_Template
 			{
 				$user = Model_User::forge(array(
 					'username' => Input::post('username'),
-					'password' => Input::post('password'),
+					'password' => password_hash(Input::post('password'), PASSWORD_DEFAULT),
 					'email' => Input::post('email'),
 					'role' => 'user', // Input::post('role'),
 				));
@@ -78,9 +78,9 @@ class Controller_User extends Controller_Template
 		if ($val->run())
 		{
 			$user->username = Input::post('username');
-			$user->password = Input::post('password');
+			$user->password = password_hash(Input::post('password'), PASSWORD_DEFAULT);
 			$user->email = Input::post('email');
-			$user->role = 'user'; //Input::post('role'); //modified by philippe
+			$user->role = $user->role; //Input::post('role'); //modified by philippe
 
 			if ($user->save())
 			{
@@ -102,7 +102,7 @@ class Controller_User extends Controller_Template
 				$user->username = $val->validated('username');
 				$user->password = $val->validated('password');
 				$user->email = $val->validated('email');
-				$user->role = 'user'; //$val->validated('role');  //modified by philippe
+				$user->role = $user->role; //$val->validated('role');  //modified by philippe
 
 				Session::set_flash('error', $val->error());
 			}
@@ -117,22 +117,39 @@ class Controller_User extends Controller_Template
 
 	public function action_delete($id = null)
 	{
-		is_null($id) and Response::redirect('user');
+        
+            is_null($id) and Response::redirect('user');
 
-		if ($user = Model_User::find($id))
-		{
-			$user->delete();
+            if ($user = Model_User::find($id)) {
+                $user->delete();
 
-			Session::set_flash('success', 'Deleted user #'.$id);
-		}
+                Session::set_flash('success', 'Deleted user #'.$id);
+            } else {
+                Session::set_flash('error', 'Could not delete user #'.$id);
+            }
 
-		else
-		{
-			Session::set_flash('error', 'Could not delete user #'.$id);
-		}
-
-		Response::redirect('user');
-
+            Response::redirect('user');
+       
 	}
 
+	public function action_login(){
+		if (Input::method() == 'POST'){
+			if ($user = Model_User::query()->where('username', Input::post('username'))->get_one()->to_array()){
+				if(password_verify(Input::post('password'),$user['password'])){
+					$_SESSION['login']= $user['username'];
+					$_SESSION['role']= $user['role'];
+					Response::redirect('film');
+				}
+			} else {
+				Session::set_flash('error', 'Username or password error');
+			}
+		} 
+		$this->template->title = "Login";
+		$this->template->content = View::forge('user/login');
+	}
+
+	public function action_logout(){
+		session_destroy();
+		Response::redirect('login');
+	}
 }
