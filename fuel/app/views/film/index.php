@@ -1,5 +1,7 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
+<?php echo render('film/_formtri'); ?>
+<br>
 <?php if ($films): ?>
 <table class="table table-striped">
 	<thead>
@@ -22,7 +24,7 @@
 			<td><?php echo $item->year; ?></td>
 			<td><?php echo $item->director; ?></td>
 			<td><?php echo $item->actors; ?></td>
-			<td><?php echo $item->runtime; ?></td>
+			<td><?php echo $item->runtime; ?> min</td>
 			<td><?php echo $item->plot; ?></td>
 			<td><?php echo $item->rented; ?></td>
 			<td><?php echo $item->poster; ?></td>
