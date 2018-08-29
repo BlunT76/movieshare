@@ -1,7 +1,8 @@
 <?php
 return array(
-	'_root_'  => 'welcome/index',  // The default route
+	'_root_'  => 'user/index',  // The default route
 	'_404_'   => 'welcome/404',    // The main 404 route
-	
+	'subscribe' => 'user/create',  //The user subscribe page
+	'login' => 'user/login', //the login user page
 	'hello(/:name)?' => array('welcome/hello', 'name' => 'hello'),
 );

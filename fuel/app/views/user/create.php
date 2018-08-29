@@ -1,4 +1,4 @@
-<h2>New <span class='muted'>User</span></h2>
+<h2><span class='muted'></span></h2>
 <br>
 
 <?php echo render('user/_form'); ?>

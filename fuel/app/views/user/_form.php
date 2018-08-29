@@ -20,12 +20,6 @@
 
 		</div>
 		<div class="form-group">
-			<?php echo Form::label('Role', 'role', array('class'=>'control-label')); ?>
-
-				<?php echo Form::input('role', Input::post('role', isset($user) ? $user->role : ''), array('class' => 'col-md-4 form-control', 'placeholder'=>'Role')); ?>
-
-		</div>
-		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
 			<?php echo Form::submit('submit', 'Save', array('class' => 'btn btn-primary')); ?>		</div>
 	</fieldset>

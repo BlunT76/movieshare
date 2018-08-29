@@ -37,7 +37,7 @@ class Controller_User extends Controller_Template
 					'username' => Input::post('username'),
 					'password' => Input::post('password'),
 					'email' => Input::post('email'),
-					'role' => Input::post('role'),
+					'role' => 'user', // Input::post('role'),
 				));
 
 				if ($user and $user->save())
@@ -58,7 +58,7 @@ class Controller_User extends Controller_Template
 			}
 		}
 
-		$this->template->title = "Users";
+		$this->template->title = "Subscribe";
 		$this->template->content = View::forge('user/create');
 
 	}
@@ -80,7 +80,7 @@ class Controller_User extends Controller_Template
 			$user->username = Input::post('username');
 			$user->password = Input::post('password');
 			$user->email = Input::post('email');
-			$user->role = Input::post('role');
+			$user->role = 'user'; //Input::post('role'); //modified by philippe
 
 			if ($user->save())
 			{
@@ -102,7 +102,7 @@ class Controller_User extends Controller_Template
 				$user->username = $val->validated('username');
 				$user->password = $val->validated('password');
 				$user->email = $val->validated('email');
-				$user->role = $val->validated('role');
+				$user->role = 'user'; //$val->validated('role');  //modified by philippe
 
 				Session::set_flash('error', $val->error());
 			}
