@@ -1,8 +1,10 @@
 <h2>Viewing <span class='muted'>#<?php echo $film->id; ?></span></h2>
 
+	
 <p>
 	<strong>Title:</strong>
 	<?php echo $film->title; ?></p>
+	
 <p>
 	<strong>Year:</strong>
 	<?php echo $film->year; ?></p>
@@ -24,6 +26,8 @@
 <p>
 	<strong>Poster:</strong>
 	<?php echo $film->poster; ?></p>
+
+	
 
 <?php echo Html::anchor('film/edit/'.$film->id, 'Edit'); ?> |
 <?php echo Html::anchor('film', 'Back'); ?>
