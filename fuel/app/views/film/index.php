@@ -41,6 +41,6 @@
 <p>No Films.</p>
 
 <?php endif; ?><p>
-	<?php echo Html::anchor('film/create', 'Add new Film', array('class' => 'btn btn-success')); ?>
+	<?php echo Html::anchor('film/newfilm', 'Add new Film', array('class' => 'btn btn-success')); ?>
 
 </p>
