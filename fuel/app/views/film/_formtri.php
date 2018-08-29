@@ -11,12 +11,12 @@
             'year' => 'Release date',
             'runtime' => 'Runtime'
             )); ?>
-        <?php echo Form::label('Rented', 'gender'); ?>
-        <?php echo Form::checkbox('gender', 'rented'); ?>
+        <?php echo Form::label('Available', 'rented'); ?>
+        <?php echo Form::checkbox('rented','1'); ?>
     <!-- </div> -->
     <!-- <div class="form-group"> -->
         <label class='control-label'>&nbsp;</label>
-        <?php echo Form::submit('submit', 'Sort', array('class' => 'btn btn-primary')); ?>
+        <?php echo Form::submit('submit', 'Sort', array('class' => 'btn btn-small btn-primary')); ?>
     </div>
 
 </fieldset>

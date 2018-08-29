@@ -24,7 +24,7 @@
 			<td><?php echo $item->year; ?></td>
 			<td><?php echo $item->director; ?></td>
 			<td><?php echo $item->actors; ?></td>
-			<td><?php echo $item->runtime; ?></td>
+			<td><?php echo $item->runtime; ?> min</td>
 			<td><?php echo $item->plot; ?></td>
 			<td><?php echo $item->rented; ?></td>
 			<td><?php echo $item->poster; ?></td>
