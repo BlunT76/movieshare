@@ -1,5 +1,7 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
+<?php echo render('film/_formtri'); ?>
+<br>
 <?php if ($films): ?>
 <table class="table table-striped">
 	<thead>
