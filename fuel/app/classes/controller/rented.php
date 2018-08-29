@@ -1,4 +1,4 @@
-<?php
+<?php session_start();
 class Controller_Rented extends Controller_Template
 {
 
@@ -27,38 +27,29 @@ class Controller_Rented extends Controller_Template
 
 	public function action_create()
 	{
-		if (Input::method() == 'POST')
+		if(isset($_SESSION['id']) && isset($_SESSION['panier']))
 		{
-			$val = Model_Rented::validate('create');
-
-			if ($val->run())
-			{
-				$rented = Model_Rented::forge(array(
-					'user_id' => Input::post('user_id'),
-					'film_id' => Input::post('film_id'),
+			$ids=explode(" ", $_SESSION['panier']);
+			$ids=array_unique($ids);
+			foreach ($ids as $v) {
+				if($v!=""){
+					$rented = Model_rented::forge(array(
+					'user_id' => $_SESSION['id'],
+					'film_id' => $v
 				));
-
-				if ($rented and $rented->save())
-				{
-					Session::set_flash('success', 'Added rented #'.$rented->id.'.');
-
-					Response::redirect('rented');
 				}
-
-				else
-				{
-					Session::set_flash('error', 'Could not save rented.');
+				if($rented->save() && $film = Model_film::find($v)){
+					$film->rented = 1;
+					$film->save();
 				}
 			}
-			else
-			{
-				Session::set_flash('error', $val->error());
-			}
+			$this->template->title= "Create";
+			$this->template->content= View::forge('rented/create');
+		}else {
+			Session::set_flash('error','Could not find session id or panier');
+			$this->template->title= "Create";
+			$this->template->content= View::forge('rented/create');
 		}
-
-		$this->template->title = "Renteds";
-		$this->template->content = View::forge('rented/create');
-
 	}
 
 	public function action_edit($id = null)

@@ -3,7 +3,6 @@ use Orm\Model;
 
 class Model_User extends Model
 {
-	protected static $_has_one = array('rented');
 	protected static $_properties = array(
 		'id',
 		'username',

@@ -1,7 +1,6 @@
 <h2>New <span class='muted'>Rented</span></h2>
 <br>
-
-<?php echo render('rented/_form'); ?>
+<h1>Récapitulatif panier</h1>
 
 
 <p><?php echo Html::anchor('rented', 'Back'); ?></p>
