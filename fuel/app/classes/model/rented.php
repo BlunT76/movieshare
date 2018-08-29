@@ -1,15 +1,12 @@
 <?php
 use Orm\Model;
 
-class Model_User extends Model
+class Model_Rented extends Model
 {
-	protected static $_has_one = array('rented');
 	protected static $_properties = array(
 		'id',
-		'username',
-		'password',
-		'email',
-		'role',
+		'user_id',
+		'film_id',
 		'created_at',
 		'updated_at',
 	);
@@ -28,10 +25,8 @@ class Model_User extends Model
 	public static function validate($factory)
 	{
 		$val = Validation::forge($factory);
-		$val->add_field('username', 'Username', 'required|max_length[255]');
-		$val->add_field('password', 'Password', 'required|max_length[255]');
-		$val->add_field('email', 'Email', 'required|valid_email|max_length[255]');
-		//$val->add_field('role', 'Role', 'required|max_length[255]');
+		$val->add_field('user_id', 'User Id', 'required|valid_string[numeric]');
+		$val->add_field('film_id', 'Film Id', 'required');
 
 		return $val;
 	}

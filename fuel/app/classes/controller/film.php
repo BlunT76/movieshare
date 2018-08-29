@@ -201,4 +201,25 @@ class Controller_Film extends Controller_Template
 			}
         }
 	}
+    public function action_loan($id = null){
+         if (isset($_SESSION['role']))
+         {
+            is_null($id) and Response::redirect('film');
+
+            if (! $film = Model_Film::find($id)) {
+                Session::set_flash('error', 'Could not find film #'.$id);
+                Response::redirect('film');
+            }
+            if ($_SESSION['panier'].=$id." ") {
+                    Session::set_flash('success', 'Film #' . $id.' ajouté au panier, voici le panier : '.$_SESSION['panier']);
+                    $this->template->title="panier";
+                    $this->template->content = View::forge('film/loan');
+                    //Response::redirect('film');
+                } else {
+                    Session::set_flash('error', 'Could not loan film #' . $id);
+                }
+         }else{
+         Response::redirect('login');
+     }
+    }
 }

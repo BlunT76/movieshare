@@ -3,6 +3,7 @@ use Orm\Model;
 
 class Model_Film extends Model
 {
+	protected static $_has_one = array('rented');
 	protected static $_properties = array(
 		'id',
 		'title',
