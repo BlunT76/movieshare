@@ -2,7 +2,8 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $title; ?></title>
+  <title><?php echo $title; ?></title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<?php echo Asset::css('bootstrap.css'); ?>
 	<style>
 		/* body { margin: 40px; } */
@@ -103,7 +104,8 @@
 <?php echo $content; ?>
 		</div>
 		<footer>
-			
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <?php echo Asset::js('bootstrap.js'); ?>
 			
 		</footer>
 	</div>
