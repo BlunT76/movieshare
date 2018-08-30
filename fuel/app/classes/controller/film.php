@@ -43,14 +43,21 @@ class Controller_Film extends Controller_Template
     {
         is_null($id) and Response::redirect('film');
 
-        if (! $data['film'] = Model_Film::find($id)) {
-            Session::set_flash('error', 'Could not find film #'.$id);
-            Response::redirect('film');
-        }
+        if (isset($_SESSION['login'])) {
 
-        $this->template->title = "Film";
-        $this->template->content = View::forge('film/view', $data);
-    }
+            if (! $data['film'] = Model_Film::find($id)) {
+                Session::set_flash('error', 'Could not find film #'.$id);
+                Response::redirect('film');
+            }
+
+            $this->template->title = "Film";
+            $this->template->content = View::forge('film/view', $data);
+        } else {
+            Session::set_flash('error','You are not connected');
+            Response::redirect('login');
+        }
+    } 
+        
 
     public function action_create()
     {
@@ -60,15 +67,15 @@ class Controller_Film extends Controller_Template
 
                 if ($val->run()) {
                     $film = Model_Film::forge(array(
-                    'title' => Input::post('title'),
-                    'year' => Input::post('year'),
-                    'director' => Input::post('director'),
-                    'actors' => Input::post('actors'),
-                    'runtime' => Input::post('runtime'),
-                    'plot' => Input::post('plot'),
-                    'rented' => Input::post('rented'),
-                    'poster' => Input::post('poster'),
-                ));
+                        'title' => Input::post('title'),
+                        'year' => Input::post('year'),
+                        'director' => Input::post('director'),
+                        'actors' => Input::post('actors'),
+                        'runtime' => Input::post('runtime'),
+                        'plot' => Input::post('plot'),
+                        'rented' => Input::post('rented'),
+                        'poster' => Input::post('poster'),
+                    ));
 
                     if ($film and $film->save()) {
                         Session::set_flash('success', 'Added film #'.$film->id.'.');
@@ -84,6 +91,8 @@ class Controller_Film extends Controller_Template
 
             $this->template->title = "Films";
             $this->template->content = View::forge('film/create');
+        } else {
+            Response::redirect('login');
         }
     }
 
@@ -187,6 +196,8 @@ class Controller_Film extends Controller_Template
                 $this->template->title = "Films";
                 $this->template->content = View::forge('film/newfilm');
             }
+        }else {
+            Response::redirect('login');
         }
     }
     
@@ -198,15 +209,15 @@ class Controller_Film extends Controller_Template
 
                 if ($val->run()) {
                     $film = Model_Film::forge(array(
-                    'title' => Input::post('title'),
-                    'year' => Input::post('year'),
-                    'director' => Input::post('director'),
-                    'actors' => Input::post('actors'),
-                    'runtime' => Input::post('runtime'),
-                    'plot' => Input::post('plot'),
-                    'rented' => Input::post('rented'),
-                    'poster' => Input::post('poster'),
-                ));
+                        'title' => Input::post('title'),
+                        'year' => Input::post('year'),
+                        'director' => Input::post('director'),
+                        'actors' => Input::post('actors'),
+                        'runtime' => Input::post('runtime'),
+                        'plot' => Input::post('plot'),
+                        'rented' => Input::post('rented'),
+                        'poster' => Input::post('poster'),
+                    ));
 
                     if ($film and $film->save()) {
                         Session::set_flash('success', 'Added film #'.$film->id.'.');
@@ -226,6 +237,8 @@ class Controller_Film extends Controller_Template
                 $this->template->title = "Films";
                 $this->template->content = View::forge('film/newfilm');
             }
+        }else {
+            Resopnse::redirect('login');
         }
     }
     public function action_loan($id = null)
@@ -251,13 +264,17 @@ class Controller_Film extends Controller_Template
 
     public function action_searchfilm()
     {
+        if(isset($_SESSION['login'])){
         if (isset($_POST['searchfilm'])) {
-            
+
             $who = '%'.$_POST['searchfilm'].'%';
             $data['films'] = DB::select()->from('films')->as_object()->where('title', 'like', $who)->or_where('plot', 'like', $who)->execute();
 
             $this->template->title = "Films";
             $this->template->content = View::forge('film/index', $data);
         }
+    }else{
+        Response::redirect('login');
+    }
     }
 }
