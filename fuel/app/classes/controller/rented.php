@@ -43,9 +43,9 @@ class Controller_Rented extends Controller_Template
 					$film->save();
 				}
 			}
+			$_SESSION['panier']="";
 			Response::redirect('film');
 			Session::set_flash('Success','Film emprunté(s)');
-			$_SESSION['panier']="";
 		}else {
 			Session::set_flash('error','Could not find session id or panier');
 			$this->template->title= "Create";
@@ -103,22 +103,26 @@ class Controller_Rented extends Controller_Template
 
 	public function action_delete($id = null)
 	{
-		is_null($id) and Response::redirect('rented');
-
-		if ($rented = Model_Rented::find($id))
+		if (isset($_POST['checkbox']))
 		{
-			$rented->delete();
-
-			Session::set_flash('success', 'Deleted rented #'.$id);
+			$selected= $_POST['checkbox'];
+			$rendu="";
+			foreach ($selected as $v) {
+				$available =Model_Film::find($v);
+				$available->rented=0;
+				$available->save();
+				$rendu.=$available->title." /";
+				$rented=Model_Rented::query()->from_cache(false)->where('film_id',$v)->get_one();
+				$rented->delete();
+			}
+			Session::set_flash('success', 'Film(s) rendu(s) : '.$rendu);
+			Response::redirect('film');
 		}
-
 		else
 		{
-			Session::set_flash('error', 'Could not delete rented #'.$id);
+			Session::set_flash('error', 'Selectionnez un film à rendre');
+			Response::redirect('film');
 		}
-
-		Response::redirect('rented');
-
 	}
 	public function action_progress()
 	{
