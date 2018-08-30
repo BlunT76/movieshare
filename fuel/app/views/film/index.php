@@ -36,7 +36,7 @@
   		</ul>
 		
 		<?php echo Html::anchor('film/view/'.$item->id, '<i class="icon-eye-open"></i> View', array('class' => 'btn btn-default btn-sm')); ?>
-
+		<?php if($item->rented==0){ echo Html::anchor('film/loan/'.$item->id,'Ajouter au panier'); }?>
 
 		<?php if($_SESSION['role']=='admin'){
 		echo Html::anchor('film/edit/'.$item->id, '<i class="icon-wrench"></i> Edit', array('class' => 'btn btn-default btn-sm')); ?>
