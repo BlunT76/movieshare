@@ -34,17 +34,18 @@ class Controller_Rented extends Controller_Template
 			foreach ($ids as $v) {
 				if($v!=""){
 					$rented = Model_rented::forge(array(
-					'user_id' => $_SESSION['id'],
-					'film_id' => $v
-				));
+						'user_id' => $_SESSION['id'],
+						'film_id' => $v
+					));
 				}
 				if($rented->save() && $film = Model_film::find($v)){
 					$film->rented = 1;
 					$film->save();
 				}
 			}
-			$this->template->title= "Create";
-			$this->template->content= View::forge('rented/create');
+			Response::redirect('film');
+			Session::set_flash('Success','Film emprunté(s)');
+			$_SESSION['panier']="";
 		}else {
 			Session::set_flash('error','Could not find session id or panier');
 			$this->template->title= "Create";
@@ -118,6 +119,34 @@ class Controller_Rented extends Controller_Template
 
 		Response::redirect('rented');
 
+	}
+	public function action_progress()
+	{
+		if(isset($_SESSION['panier'])){
+			$panier=[];
+			$ids=explode(" ", $_SESSION['panier']);
+			$ids=array_unique($ids);
+			foreach ($ids as $v) {
+				if ($v!="") {
+					if($film=Model_Film::find($v)){
+						array_push($panier, $film);
+					}
+				}
+			}			
+			if(!empty($panier)){
+				$data['panier']=$panier;
+				$this->template->title="Panier";
+				$this->template->content= View::forge('rented/progress',$data);
+			}
+		}else{
+			$this->template->title="Panier";
+			$this->template->content= View::forge('rented/progress');
+		}
+	}
+	//La fonction ci-dessous nous renvoi depuis le panier jusqu'a la liste de films
+	public function action_film()
+	{
+		Response::redirect('film');
 	}
 
 }
