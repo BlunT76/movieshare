@@ -4,9 +4,13 @@ class Controller_User extends Controller_Template
 
 	public function action_index()
 	{
-		$data['users'] = Model_User::find('all');
-		$this->template->title = "Users";
-		$this->template->content = View::forge('user/index', $data);
+        if (isset($_SESSION['role']) && $_SESSION['role']== 'admin') {
+            $data['users'] = Model_User::find('all');
+            $this->template->title = "Users";
+            $this->template->content = View::forge('user/index', $data);
+        } else {
+			Response::redirect('film');
+		}
 
 	}
 
@@ -44,7 +48,7 @@ class Controller_User extends Controller_Template
 				{
 					Session::set_flash('success', 'Added user #'.$user->id.'.');
 
-					Response::redirect('user');
+					Response::redirect('film');
 				}
 
 				else
@@ -65,59 +69,52 @@ class Controller_User extends Controller_Template
 
 	public function action_edit($id = null)
 	{
-		is_null($id) and Response::redirect('user');
+        if (isset($_SESSION['role']) && $_SESSION['role']== 'admin') {
+            is_null($id) and Response::redirect('user');
 
-		if ( ! $user = Model_User::find($id))
-		{
-			Session::set_flash('error', 'Could not find user #'.$id);
-			Response::redirect('user');
+            if (! $user = Model_User::find($id)) {
+                Session::set_flash('error', 'Could not find user #'.$id);
+                Response::redirect('user');
+            }
+
+            $val = Model_User::validate('edit');
+
+            if ($val->run()) {
+                $user->username = Input::post('username');
+                $user->password = password_hash(Input::post('password'), PASSWORD_DEFAULT);
+                $user->email = Input::post('email');
+                $user->role = $user->role; //Input::post('role'); //modified by philippe
+
+                if ($user->save()) {
+                    Session::set_flash('success', 'Updated user #' . $id);
+
+                    Response::redirect('user');
+                } else {
+                    Session::set_flash('error', 'Could not update user #' . $id);
+                }
+            } else {
+                if (Input::method() == 'POST') {
+                    $user->username = $val->validated('username');
+                    $user->password = $val->validated('password');
+                    $user->email = $val->validated('email');
+                    $user->role = $user->role; //$val->validated('role');  //modified by philippe
+
+                    Session::set_flash('error', $val->error());
+                }
+
+                $this->template->set_global('user', $user, false);
+            }
+
+            $this->template->title = "Users";
+            $this->template->content = View::forge('user/edit');
+        } else {
+			Response::redirect('login');
 		}
-
-		$val = Model_User::validate('edit');
-
-		if ($val->run())
-		{
-			$user->username = Input::post('username');
-			$user->password = password_hash(Input::post('password'), PASSWORD_DEFAULT);
-			$user->email = Input::post('email');
-			$user->role = $user->role; //Input::post('role'); //modified by philippe
-
-			if ($user->save())
-			{
-				Session::set_flash('success', 'Updated user #' . $id);
-
-				Response::redirect('user');
-			}
-
-			else
-			{
-				Session::set_flash('error', 'Could not update user #' . $id);
-			}
-		}
-
-		else
-		{
-			if (Input::method() == 'POST')
-			{
-				$user->username = $val->validated('username');
-				$user->password = $val->validated('password');
-				$user->email = $val->validated('email');
-				$user->role = $user->role; //$val->validated('role');  //modified by philippe
-
-				Session::set_flash('error', $val->error());
-			}
-
-			$this->template->set_global('user', $user, false);
-		}
-
-		$this->template->title = "Users";
-		$this->template->content = View::forge('user/edit');
-
 	}
 
 	public function action_delete($id = null)
 	{
-        
+        if (isset($_SESSION['role']) && $_SESSION['role']== 'admin') {
             is_null($id) and Response::redirect('user');
 
             if ($user = Model_User::find($id)) {
@@ -129,7 +126,9 @@ class Controller_User extends Controller_Template
             }
 
             Response::redirect('user');
-       
+        } else {
+			Response::redirect('login');
+		}
 	}
 
 	public function action_login(){

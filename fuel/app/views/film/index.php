@@ -6,6 +6,7 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
+			<th>Poster</th>
 			<th>Title</th>
 			<th>Year</th>
 			<th>Director</th>
@@ -13,13 +14,12 @@
 			<th>Runtime</th>
 			<th>Plot</th>
 			<th>Rented</th>
-			<th>Poster</th>
 			<th>&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
 <?php foreach ($films as $item): ?>		<tr>
-
+			<td><img src="<?php echo $item->poster; ?>"></td>
 			<td><?php echo $item->title; ?></td>
 			<td><?php echo $item->year; ?></td>
 			<td><?php echo $item->director; ?></td>
@@ -27,7 +27,7 @@
 			<td><?php echo $item->runtime; ?> min</td>
 			<td><?php echo $item->plot; ?></td>
 			<td><?php echo $item->rented; ?></td>
-			<td><?php echo $item->poster; ?></td>
+		<?php if (isset($_SESSION['role']) && $_SESSION['role']== 'admin'){ ?>	
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
@@ -35,6 +35,7 @@
 				</div>
 
 			</td>
+		<?php } ?>
 		</tr>
 <?php endforeach; ?>	</tbody>
 </table>
