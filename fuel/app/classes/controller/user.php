@@ -137,6 +137,7 @@ class Controller_User extends Controller_Template
 				if(password_verify(Input::post('password'),$user['password'])){
 					$_SESSION['login']= $user['username'];
 					$_SESSION['role']= $user['role'];
+					$_SESSION['id']= $user['id'];
 					$_SESSION['panier']=""; 
 					Response::redirect('film');
 				}

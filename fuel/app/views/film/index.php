@@ -1,5 +1,6 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
+<a href="rented/progress"><button class="btn btn-primary">Voir mon panier</button></a>
 <?php echo render('film/_formtri'); ?>
 <br>
 <?php if ($films): ?>
