@@ -137,6 +137,9 @@ class Controller_Rented extends Controller_Template
 				$data['panier']=$panier;
 				$this->template->title="Panier";
 				$this->template->content= View::forge('rented/progress',$data);
+			}else{
+				$this->template->title="Panier";
+				$this->template->content= View::forge('rented/progress');
 			}
 		}else{
 			$this->template->title="Panier";
