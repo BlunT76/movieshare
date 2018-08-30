@@ -2,31 +2,45 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title><?php echo $title; ?></title>
+  <title><?php echo $title; ?></title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<?php echo Asset::css('bootstrap.css'); ?>
 	<style>
 		/* body { margin: 40px; } */
 	</style>
 </head>
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">MovieShare</a>
-    </div>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">MovieShare</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/film">Movie list<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/rented/progress">Panier<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search film</button>
+    </form>
+    <?php if (isset($_SESSION['login'])){?>
+    <ul class="navbar-nav ml-auto">
+    <li class="nav-item active">
+        <a class="nav-link" href="/film">Logout<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+    <?php }?>
+  </div>
+</nav>
+<!--
+        //inserer condition pour admin 
+        <li><a href="/film/newfilm">Searchfilm</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -47,9 +61,9 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-	  <?php if (isset($_SESSION['login'])){?>
+	  <?php// if (isset($_SESSION['login'])){?>
         <li><a href="user/logout">Logout</a></li>
-	  <?php }?>
+	  <?php// }?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -61,9 +75,9 @@
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+    </div> /.navbar-collapse 
+  </div> /.container-fluid 
+</nav>-->
 
 	<div class="container">
 		<div class="col-md-12">
@@ -90,7 +104,8 @@
 <?php echo $content; ?>
 		</div>
 		<footer>
-			
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <?php echo Asset::js('bootstrap.js'); ?>
 			
 		</footer>
 	</div>
