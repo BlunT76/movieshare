@@ -4,13 +4,14 @@
 	<meta charset="utf-8">
   <title><?php echo $title; ?></title>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<?php echo Asset::css('bootstrap.css'); ?>
+  <?php echo Asset::css('bootstrap.css'); ?>
+  <?php echo Asset::css('custom.css'); ?>
 	<style>
 		/* body { margin: 40px; } */
 	</style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand" href="/film">MovieShare</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -25,15 +26,18 @@
         <a class="nav-link" href="/rented/progress">Panier<span class="sr-only">(current)</span></a>
       </li>
     </ul>
+    <ul class="navbar-nav mx-auto">
+      <li><h2 class="title" >AlloCino</h2></li>
+    </ul>
     
     <?php if (isset($_SESSION['login'])){?>
     <ul class="navbar-nav ml-auto">
     <form action="/film/searchfilm/" method="POST" class="form-inline my-2 my-lg-0 ml-auto">
       <input name="searchfilm"  class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search film</button>
+      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search film</button>
     </form>
     <li class="nav-item active">
-        <a class="btn btn-outline-danger ml-3" href="/logout">Logout<span class="sr-only">(current)</span></a>
+        <a class="btn btn-dark ml-3" href="/logout">Logout<span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <?php }?>

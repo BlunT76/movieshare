@@ -1,0 +1,41 @@
+nav {
+    background-color: #FECC00;
+}
+
+.title {
+    text-decoration: underline;
+}
+
+.card {
+    height: 420px;
+    box-shadow: 2px 2px 3px gray;
+    border-left: 1px outset gray;
+    border-top: 1px outset gray;
+}
+
+.card-img-top {
+    height: 280px;
+}
+
+
+
+
+
+/* ---------------------MEDIA QUERIES------------------------- */
+
+@media (max-width: 1199px) {
+   
+}
+
+@media (max-width: 991px) {
+
+}
+
+@media (max-width: 767px) {
+    .card {
+        height: 300px;
+    }
+    .card-img-top {
+        height: 150px;
+    }
+}

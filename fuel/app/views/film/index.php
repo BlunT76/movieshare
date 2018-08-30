@@ -30,8 +30,8 @@
 <div class="row">
 
 	<?php foreach ($films as $item): ?>
-	<div class="col col-md-4">
-		<div class="card">
+	<div class="col col-md-3">
+		<div class="card mb-5">
 			<img class="card-img-top" src="<?php echo $item->poster; ?>" alt="Card image cap">
 			<div class="card-body">
 				<h5 class="card-title">
