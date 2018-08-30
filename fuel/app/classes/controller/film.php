@@ -26,6 +26,12 @@ class Controller_Film extends Controller_Template
                 
             } else {
                 $data['films'] = Model_Film::find('all');
+                $rented = Model_Rented::query()->from_cache(false)->where('user_id','=',$_SESSION['id'])->get();
+                $data['rented']=[];
+                foreach ($rented as $v) {
+                   $transit=Model_Film::find($v['film_id']);
+                   array_push($data['rented'], $transit);
+                }
                 $this->template->title = "Films";
                 $this->template->content = View::forge('film/index', $data);
             }
@@ -234,10 +240,9 @@ class Controller_Film extends Controller_Template
                 Response::redirect('film');
             }
             if ($_SESSION['panier'].=$id." ") {
-                Session::set_flash('success', 'Film #' . $id.' ajouté au panier, voici le panier : '.$_SESSION['panier']);
-                $this->template->title="panier";
-                //$this->template->content = View::forge('film');
-            Response::redirect('film');
+                Session::set_flash('success', 'Film ajouté');
+                Response::redirect('film');
+            //Response::redirect('film');
             } else {
                 Session::set_flash('error', 'Could not loan film #' . $id);
             }

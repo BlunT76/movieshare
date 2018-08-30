@@ -1,6 +1,15 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
-<a href="rented/progress"><button class="btn btn-primary">Voir mon panier</button></a>
+<?php if(isset($rented) && count($rented)>=1) :?><h5>La liste des films que j'ai emprunté :</h5>
+<form method="POST" action="rented/delete">
+<ul>
+	<?php foreach ($rented as $v) :?>
+	<li><?php echo $v->title."  " ;?><input type="checkbox" name="checkbox[]" value="<?php echo $v->id;?>"></li>
+<?php endforeach;  ?>
+<button type="submit" class="btn btn-danger btn-sm">Rendre le(s) film(s)</button>
+</ul>
+</form>
+<?php endif; ?>
 <?php echo render('film/_formtri'); ?>
 <br>
 

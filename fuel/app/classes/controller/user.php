@@ -147,6 +147,9 @@ class Controller_User extends Controller_Template
 		} 
 		$this->template->title = "Login";
 		$this->template->content = View::forge('user/login');
+		if(isset($_SESSION['id'])){
+			Response::redirect('film');
+		}
 	}
 
 	public function action_logout(){
