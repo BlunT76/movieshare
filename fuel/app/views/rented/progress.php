@@ -12,9 +12,9 @@
 				</tr>
 				<?php endforeach; ?>	</tbody>
 			</table>
-
+			
 			<?php else: ?>
 				<p>Panier vide.</p>
 				<?php endif; ?><p>
 					<a href="film"><button class="btn btn-success">Retour aux films</button></a>
-					<?php if(isset($panier)){ ?><a href="create"><button class="btn btn-success">Valider mon panier</button></a><?php } ?>
+					<?php if(isset($panier)){ ?><a href="create"><button class="btn btn-success">Valider mon panier</button></a> <a href="clear"><button class="btn btn-success">Vider le panier</button></a><?php } ?>

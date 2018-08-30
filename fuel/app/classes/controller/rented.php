@@ -92,8 +92,8 @@ class Controller_Rented extends Controller_Template
 				$this->template->title="Panier";
 				$this->template->content= View::forge('rented/progress',$data);
 			}else{
-				Session::set_flash('Error','Panier vide');
-				Response::redirect('film');
+				$this->template->title="Panier";
+				$this->template->content= View::forge('rented/progress');
 			}
 		}else{
 			Response::redirect('film');
@@ -103,6 +103,16 @@ class Controller_Rented extends Controller_Template
 	public function action_film()
 	{
 		Response::redirect('film');
+	}
+	public function action_clear()
+	{
+		if(isset($_SESSION['panier']))
+		{
+			$_SESSION['panier']="";
+			Response::redirect('rented/progress');
+		}else {
+			Response::redirect('rented/progress');
+		}
 	}
 
 }
