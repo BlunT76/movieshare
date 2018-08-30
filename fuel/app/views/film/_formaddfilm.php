@@ -55,6 +55,6 @@ echo $data['title'];
 		</div>
 		<div class="form-group">
 			<label class='control-label'>&nbsp;</label>
-			<?php echo Form::submit('submit', 'Save', array('class' => 'btn btn-primary')); ?>		</div>
+			<?php echo Form::submit('submit', 'Save', array('class' => 'btn btn-success')); ?>		</div>
 	</fieldset>
 <?php echo Form::close(); ?>

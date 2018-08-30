@@ -94,7 +94,7 @@ echo Form::open(array('action' => '/resultfilm',"class"=>"form-horizontal")); ?>
     </div>
     <div class="form-group">
         <label class='control-label'>&nbsp;</label>
-        <?php echo Form::submit('submit', 'Add to DataBase', array('class' => 'btn btn-primary')); ?>		</div>
+        <?php echo Form::submit('submit', 'Add to DataBase', array('class' => 'btn btn-success')); ?>		</div>
 </fieldset>
 <?php echo Form::close(); ?>
 <p><?php echo Html::anchor('film', 'Back'); ?></p>

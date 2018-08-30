@@ -6,31 +6,29 @@ class Controller_Film extends Controller_Template
         if (isset($_SESSION['login'])) {
             if (Input::method() == 'POST') {
                 if (isset($_POST['rented'])) {
-					$rented = 0;
-					$data['films'] = Model_Film::find('all', array(
-						'where' => array(
-							array('rented', $rented),
-						),
-						'order_by'=> array($_POST['sort'] =>'asc')
-					));
-					$this->template->title = "Films";
-					$this->template->content = View::forge('film/index', $data);
+                    $rented = 0;
+                    $data['films'] = Model_Film::find('all', array(
+                        'where' => array(
+                            array('rented', $rented),
+                        ),
+                        'order_by'=> array($_POST['sort'] =>'asc')
+                    ));
+                    $this->template->title = "Films";
+                    $this->template->content = View::forge('film/index', $data);
                 } else {
-					$data['films'] = Model_Film::find('all', array(
-						'order_by'=> array($_POST['sort'] =>'asc')
-					));
-					$this->template->title = "Films";
-					$this->template->content = View::forge('film/index', $data);
-				}
-                
-                
+                    $data['films'] = Model_Film::find('all', array(
+                        'order_by'=> array($_POST['sort'] =>'asc')
+                    ));
+                    $this->template->title = "Films";
+                    $this->template->content = View::forge('film/index', $data);
+                }
             } else {
                 $data['films'] = Model_Film::find('all');
-                $rented = Model_Rented::query()->from_cache(false)->where('user_id','=',$_SESSION['id'])->get();
+                $rented = Model_Rented::query()->from_cache(false)->where('user_id', '=', $_SESSION['id'])->get();
                 $data['rented']=[];
                 foreach ($rented as $v) {
-                   $transit=Model_Film::find($v['film_id']);
-                   array_push($data['rented'], $transit);
+                    $transit=Model_Film::find($v['film_id']);
+                    array_push($data['rented'], $transit);
                 }
                 $this->template->title = "Films";
                 $this->template->content = View::forge('film/index', $data);
@@ -248,6 +246,18 @@ class Controller_Film extends Controller_Template
             }
         } else {
             Response::redirect('login');
+        }
+    }
+
+    public function action_searchfilm()
+    {
+        if (isset($_POST['searchfilm'])) {
+            
+            $who = '%'.$_POST['searchfilm'].'%';
+            $data['films'] = DB::select()->from('films')->as_object()->where('title', 'like', $who)->or_where('plot', 'like', $who)->execute();
+
+            $this->template->title = "Films";
+            $this->template->content = View::forge('film/index', $data);
         }
     }
 }
