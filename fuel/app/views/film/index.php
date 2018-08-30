@@ -19,32 +19,61 @@
 		</tr>
 	</thead>
 	<tbody>
-<?php foreach ($films as $item): ?>		<tr>
+		<?php foreach ($films as $item): ?>
+		<tr>
 			<td><img src="<?php echo $item->poster; ?>"></td>
-			<td><?php echo $item->title; ?></td>
-			<td><?php echo $item->year; ?></td>
-			<td><?php echo $item->director; ?></td>
-			<td><?php echo $item->actors; ?></td>
-			<td><?php echo $item->runtime; ?> min</td>
-			<td><?php echo $item->plot; ?></td>
-			<td><?php echo $item->rented; ?></td>
-		<?php if (isset($_SESSION['role']) && $_SESSION['role']== 'admin'){ ?>	
+			<td>
+				<?php echo $item->title; ?>
+			</td>
+			<td>
+				<?php echo $item->year; ?>
+			</td>
+			<td>
+				<?php echo $item->director; ?>
+			</td>
+			<td>
+				<?php echo $item->actors; ?>
+			</td>
+			<td>
+				<?php echo $item->runtime; ?> min</td>
+			<td>
+				<?php echo $item->plot; ?>
+			</td>
+			<td>
+				<?php echo $item->rented; ?>
+			</td>
+			<?php if (isset($_SESSION['role']) && $_SESSION['role']== 'admin'){ ?>
 			<td>
 				<div class="btn-toolbar">
 					<div class="btn-group">
-						<?php echo Html::anchor('film/view/'.$item->id, '<i class="icon-eye-open"></i> View', array('class' => 'btn btn-default btn-sm')); ?>						<?php echo Html::anchor('film/edit/'.$item->id, '<i class="icon-wrench"></i> Edit', array('class' => 'btn btn-default btn-sm')); ?>						<?php echo Html::anchor('film/delete/'.$item->id, '<i class="icon-trash icon-white"></i> Delete', array('class' => 'btn btn-sm btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>					</div>
+						<?php echo Html::anchor('film/view/'.$item->id, '<i class="icon-eye-open"></i> View', array('class' => 'btn btn-default btn-sm')); ?>
+						<?php echo Html::anchor('film/edit/'.$item->id, '<i class="icon-wrench"></i> Edit', array('class' => 'btn btn-default btn-sm')); ?>
+						<?php echo Html::anchor('film/delete/'.$item->id, '<i class="icon-trash icon-white"></i> Delete', array('class' => 'btn btn-sm btn-danger', 'onclick' => "return confirm('Are you sure?')")); ?>
+					</div>
 				</div>
 
 			</td>
-		<?php } ?>
+			<?php } ?>
+			
+
+			<?php if($item->rented==0){ ?> 
+			<td>
+				<div class="btn-toolbar">
+					<div class="btn-group">
+						<?php echo Html::anchor('film/loan/'.$item->id,'Ajouter au panier'); ?>
+						<?php } ?>
+					</div>
+			</td>
 		</tr>
-<?php endforeach; ?>	</tbody>
+		<?php endforeach; ?>
+	</tbody>
 </table>
 
 <?php else: ?>
 <p>No Films.</p>
 
-<?php endif; ?><p>
+<?php endif; ?>
+<p>
 	<?php echo Html::anchor('film/newfilm', 'Add new Film', array('class' => 'btn btn-success')); ?>
 
 </p>

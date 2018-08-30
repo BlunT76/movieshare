@@ -236,8 +236,8 @@ class Controller_Film extends Controller_Template
             if ($_SESSION['panier'].=$id." ") {
                 Session::set_flash('success', 'Film #' . $id.' ajouté au panier, voici le panier : '.$_SESSION['panier']);
                 $this->template->title="panier";
-                $this->template->content = View::forge('film/loan');
-            //Response::redirect('film');
+                //$this->template->content = View::forge('film');
+            Response::redirect('film');
             } else {
                 Session::set_flash('error', 'Could not loan film #' . $id);
             }
