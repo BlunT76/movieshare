@@ -1,18 +1,24 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
 <?php if(isset($rented) && count($rented)>=1) :?>
-<h5>La liste des films que j'ai emprunté :</h5>
+<div class="row">
+<div class="border border-success rounded p-3 col-5">
+<?php echo render('film/_formtri'); ?>
+</div>
+<div class="border border-danger rounded p-3 col-5 offset-1">
+<h5>Rented movies :</h5>
 <form method="POST" action="rented/delete">
 	<ul>
 		<?php foreach ($rented as $v) :?>
 		<li>
 			<?php echo $v->title."  " ;?><input type="checkbox" name="checkbox[]" value="<?php echo $v->id;?>"></li>
 		<?php endforeach;  ?>
-		<button type="submit" class="btn btn-danger btn-sm">Rendre le(s) film(s)</button>
 	</ul>
+	<button type="submit" class="btn btn-danger btn-sm">Send movies back</button>
 </form>
+</div>
 <?php endif; ?>
-<?php echo render('film/_formtri'); ?>
+</div>
 <br>
 <?php if($_SESSION['role']=='admin'){?>
 <p>

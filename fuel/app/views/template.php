@@ -33,7 +33,7 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search film</button>
     </form>
     <li class="nav-item active">
-        <a class="nav-link" href="/logout">Logout<span class="sr-only">(current)</span></a>
+        <a class="btn btn-outline-danger ml-3" href="/logout">Logout<span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <?php }?>

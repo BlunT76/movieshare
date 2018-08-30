@@ -30,7 +30,7 @@ class Controller_Film extends Controller_Template
                     $transit=Model_Film::find($v['film_id']);
                     array_push($data['rented'], $transit);
                 }
-                $this->template->title = "Films";
+                $this->template->title = "Movies";
                 $this->template->content = View::forge('film/index', $data);
             }
         } else {
@@ -48,7 +48,7 @@ class Controller_Film extends Controller_Template
             Response::redirect('film');
         }
 
-        $this->template->title = "Film";
+        $this->template->title = "Movie";
         $this->template->content = View::forge('film/view', $data);
     }
 
@@ -82,7 +82,7 @@ class Controller_Film extends Controller_Template
                 }
             }
 
-            $this->template->title = "Films";
+            $this->template->title = "Movies";
             $this->template->content = View::forge('film/create');
         }
     }
@@ -133,7 +133,7 @@ class Controller_Film extends Controller_Template
                 $this->template->set_global('film', $film, false);
             }
 
-            $this->template->title = "Films";
+            $this->template->title = "Movies";
             $this->template->content = View::forge('film/edit');
         } else {
             Response::redirect('film');
@@ -180,11 +180,11 @@ class Controller_Film extends Controller_Template
                 $data["plot"] = (isset($info["Plot"]) ? $info["Plot"] : null);
                 $data["poster"] = (isset($info["Poster"]) ? $info["Poster"] : null);
 
-                $this->template->title = "Films";
+                $this->template->title = "Movies";
                 $this->template->content = View::forge('film/resultfilm', array('data'=>$data));
             //$this->template->content = View::forge('film/view', $arr);
             } else {
-                $this->template->title = "Films";
+                $this->template->title = "Movies";
                 $this->template->content = View::forge('film/newfilm');
             }
         }
@@ -220,10 +220,10 @@ class Controller_Film extends Controller_Template
                     Session::set_flash('error', $val->error());
                     //Response::redirect('/film/newfilm');
                 }
-                $this->template->title = "Films";
+                $this->template->title = "Movies";
                 $this->template->content = View::forge('film/create');
             } else {
-                $this->template->title = "Films";
+                $this->template->title = "Movies";
                 $this->template->content = View::forge('film/newfilm');
             }
         }
@@ -252,7 +252,7 @@ class Controller_Film extends Controller_Template
     public function action_searchfilm()
     {
         if (isset($_POST['searchfilm'])) {
-            
+
             $who = '%'.$_POST['searchfilm'].'%';
             $data['films'] = DB::select()->from('films')->as_object()->where('title', 'like', $who)->or_where('plot', 'like', $who)->execute();
 
@@ -260,4 +260,6 @@ class Controller_Film extends Controller_Template
             $this->template->content = View::forge('film/index', $data);
         }
     }
+
+    
 }
