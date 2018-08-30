@@ -3,5 +3,5 @@
 
 <?php echo render('user/_formLogin'); ?>
 
-<p><?php echo Html::anchor('user/create', 'Subscribe now'); ?></p>
-<p><?php echo Html::anchor('user', 'Back'); ?></p>
+<h3><?php echo Html::anchor('user/create', 'Subscribe now !!!', array('class'=>'btn btn-success ml-2')); ?></h3>
+
