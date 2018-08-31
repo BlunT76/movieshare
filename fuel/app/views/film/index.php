@@ -34,7 +34,7 @@
 <div class="row mt-4">
 
 	<?php foreach ($films as $item): ?>
-	<div class="col-12 col-sm-6 col-md-4 col-lg-4">
+	<div class="col-12 col-sm-6 col-md-6 col-lg-4">
 		<div class="card mb-5">
 			<img class="card-img-top" src="<?php echo $item->poster; ?>" alt="Card image cap">
 			<div class="card-body">

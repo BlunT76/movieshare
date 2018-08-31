@@ -38,7 +38,7 @@ nav {
 }
 
 @media (max-width: 767px) {
-    /* .card-img-top {
-        height: 150px;
-    } */
+    .card {
+        width: 80%;
+    }
 }
