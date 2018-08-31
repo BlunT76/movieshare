@@ -7,15 +7,15 @@ nav {
 }
 
 .card {
-    height: 420px;
+    /height: 420px;
     box-shadow: 2px 2px 3px gray;
     border-left: 1px outset gray;
     border-top: 1px outset gray;
-}
+} 
 
-.card-img-top {
-    height: 280px;
-}
+/* .card-img-top {
+    /height: 280px;
+} */ */
 
 
 
@@ -32,10 +32,10 @@ nav {
 }
 
 @media (max-width: 767px) {
-    .card {
-        height: 300px;
+    /* .card {
+        /height: 300px;
     }
     .card-img-top {
-        height: 150px;
-    }
+        /height: 150px;
+    } */
 }

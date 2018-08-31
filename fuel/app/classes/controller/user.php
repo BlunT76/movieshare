@@ -138,15 +138,18 @@ class Controller_User extends Controller_Template
     }
 
     public function action_login(){
-    	if (Input::method() == 'POST'){
-    		if ($user = Model_User::query()->where('username', Input::post('username'))->get_one()->to_array()){
+    	if (Input::method() == 'POST' && strlen(Input::post('username'))>0){
+			if($user = Model_User::query()->where('username', Input::post('username'))->get_one()== null){
+				Session::set_flash('error', 'Username or password error');
+			}
+    		elseif ($user = Model_User::query()->where('username', Input::post('username'))->get_one()->to_array()){
     			if(password_verify(Input::post('password'),$user['password'])){
     				$_SESSION['login']= $user['username'];
     				$_SESSION['role']= $user['role'];
     				$_SESSION['id']= $user['id'];
     				$_SESSION['panier']=""; 
     				Response::redirect('film');
-    			}
+    			} 
     		} else {
     			Session::set_flash('error', 'Username or password error');
     		}

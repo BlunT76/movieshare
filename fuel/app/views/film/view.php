@@ -24,8 +24,8 @@
 	<strong>Rented:</strong>
 	<?php echo $film->rented; ?></p>
 <p>
-	<strong>Poster:</strong>
-	<?php echo $film->poster; ?></p>
+	<strong>Poster:</strong><img src="
+	<?php echo $film->poster; ?>"></p>
 
 	
 
