@@ -52,7 +52,7 @@ class Controller_User extends Controller_Template
 				{
 					Session::set_flash('success', 'Added user #'.$user->id.'.');
 
-					Response::redirect('film');
+					Response::redirect('login');
 				}
 
 				else

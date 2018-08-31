@@ -12,7 +12,7 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light shadow sticky-top mb-3">
-  <a class="navbar-brand" href="/film">MovieShare</a>
+  <a class="navbar-brand" href="/film"><h2>AlloCino</h2></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,9 +26,9 @@
         <a class="nav-link" href="/rented/progress">Panier<span class="sr-only">(current)</span></a>
       </li>
     </ul>
-    <ul class="navbar-nav mx-auto">
+    <!-- <ul class="navbar-nav mx-auto">
       <li><h2 class="title" >AlloCino</h2></li>
-    </ul>
+    </ul> -->
     
     <?php if (isset($_SESSION['login'])){?>
     <ul class="navbar-nav ml-auto">

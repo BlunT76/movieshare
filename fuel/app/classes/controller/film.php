@@ -268,6 +268,7 @@ class Controller_Film extends Controller_Template
 
             $who = '%'.$_POST['searchfilm'].'%';
             $data['films'] = DB::select()->from('films')->as_object()->where('title', 'like', $who)->or_where('plot', 'like', $who)->execute();
+            $data['searchexist'] = 0;
 
             $this->template->title = "Films";
             $this->template->content = View::forge('film/index', $data);

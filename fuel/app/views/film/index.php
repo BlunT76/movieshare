@@ -1,5 +1,6 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
+<?php if(!isset($searchexist)){?>
 <div class="container row">
 <div class="border border-dark rounded p-3 col-5 shadow-sm">
 	<?php echo render('film/_formtri'); ?>
@@ -20,8 +21,8 @@
 			<button type="submit" class="btn btn-danger btn-sm">Send movies back</button>
 		</form>
 	</div>
-	<?php endif; ?>
-
+	<?php endif; 
+}?>
 <br>
 <?php if($_SESSION['role']=='admin'){?>
 <p>
@@ -33,11 +34,11 @@
 <div class="row mt-4">
 
 	<?php foreach ($films as $item): ?>
-	<div class="col col-md-4">
+	<div class="col-12 col-sm-6 col-md-4 col-lg-4">
 		<div class="card mb-5">
 			<img class="card-img-top" src="<?php echo $item->poster; ?>" alt="Card image cap">
 			<div class="card-body">
-				<h5 class="card-title">
+				<h5 class="titre card-title text-center">
 					<?php echo $item->title; ?>
 				</h5>
 				<button class="btn btn-light float-right" type="button" data-toggle="collapse" data-target="#collapseExample<?php echo $item->id;?>"
