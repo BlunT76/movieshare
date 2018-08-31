@@ -1,12 +1,13 @@
 <h2>Listing <span class='muted'>Films</span></h2>
 <br>
+<div class="container row">
 <div class="border border-dark rounded p-3 col-5 shadow-sm">
 	<?php echo render('film/_formtri'); ?>
 </div>
 <?php if(isset($rented) && count($rented)>=1) :?>
-<div class="row">
 
-	<div class="border border-dark rounded p-3 col-5 offset-1 shadow-sm">
+
+	<div class="border border-dark rounded p-3 col-5 ml-auto shadow-sm">
 		<h5>Rented movies :</h5>
 		<form method="POST" action="rented/delete">
 			<ul>
@@ -20,7 +21,7 @@
 		</form>
 	</div>
 	<?php endif; ?>
-</div>
+
 <br>
 <?php if($_SESSION['role']=='admin'){?>
 <p>
@@ -29,7 +30,7 @@
 <?php } ?>
 
 <?php if ($films): ?>
-<div class="row">
+<div class="row mt-4">
 
 	<?php foreach ($films as $item): ?>
 	<div class="col col-md-4">
@@ -82,3 +83,4 @@
 <p>No Films.</p>
 
 <?php endif; ?>
+</div>
