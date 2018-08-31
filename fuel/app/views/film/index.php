@@ -36,7 +36,7 @@
 		<div class="card mb-5">
 			<img class="card-img-top" src="<?php echo $item->poster; ?>" alt="Card image cap">
 			<div class="card-body">
-				<h5 class="card-title">
+				<h5 class="titre card-title text-center">
 					<?php echo $item->title; ?>
 				</h5>
 				<button class="btn btn-light float-right" type="button" data-toggle="collapse" data-target="#collapseExample<?php echo $item->id;?>"
